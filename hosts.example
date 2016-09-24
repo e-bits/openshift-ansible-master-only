@@ -71,7 +71,7 @@ openshift_install_examples=true
 
 # Configure loggingPublicURL in the master config for aggregate logging
 # See: https://docs.openshift.org/latest/install_config/aggregate_logging.html
-openshift_master_logging_public_url=https://kibana.routes.10.0.0.137.xip.io
+openshift_master_logging_public_url=https://kibana.routes.192.168.2.200.xip.io
 
 # Configure imagePolicyConfig in the master config
 # See: https://godoc.org/github.com/openshift/origin/pkg/cmd/server/api#ImagePolicyConfig
@@ -207,15 +207,15 @@ osm_cockpit_plugins=['cockpit-kubernetes']
 #osm_api_server_args={'max-requests-inflight': ['400']}
 
 # default subdomain to use for exposed routes
-openshift_master_default_subdomain=routes.10.0.0.137.xip.io
+openshift_master_default_subdomain=routes.192.168.2.200.xip.io
 
 # Master is available via the following public URL. Routing is done via the OpenShift router
 # See: https://blog.openshift.com/run-openshift-console-port-443/
-#openshift_master_public_api_url=https://openshift.10.0.0.137.xip.io
-#openshift_master_public_console_url=https://openshift.10.0.0.137.xip.io/console
+#openshift_master_public_api_url=https://openshift.192.168.2.200.xip.io
+#openshift_master_public_console_url=https://openshift.192.168.2.200.xip.io/console
 
 # additional cors origins
-osm_custom_cors_origins=['openshift.10.0.0.137.xip.io']
+osm_custom_cors_origins=['openshift.192.168.2.200.xip.io']
 
 # default project node selector
 #osm_default_node_selector='region=primary'
@@ -297,22 +297,22 @@ osm_custom_cors_origins=['openshift.10.0.0.137.xip.io']
 # NFS Host Group
 # An NFS volume will be created with path "nfs_directory/volume_name"
 # on the host within the [nfs] host group.  For example, the volume
-# path using these options would be "/exports/registry"
+# path using these options would be "/storage/registry"
 openshift_hosted_registry_storage_kind=nfs
 openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
-openshift_hosted_registry_storage_nfs_directory=/exports
+openshift_hosted_registry_storage_nfs_directory=/storage
 openshift_hosted_registry_storage_nfs_options='*(rw,root_squash)'
 openshift_hosted_registry_storage_volume_name=registry
-openshift_hosted_registry_storage_volume_size=10Gi
+openshift_hosted_registry_storage_volume_size=100Gi
 #
 # External NFS Host
 # NFS volume must already exist with path "nfs_directory/_volume_name" on
 # the storage_host. For example, the remote volume path using these
-# options would be "nfs.example.com:/exports/registry"
+# options would be "nfs.example.com:/storage/registry"
 #openshift_hosted_registry_storage_kind=nfs
 #openshift_hosted_registry_storage_access_modes=['ReadWriteMany']
-#openshift_hosted_registry_storage_host=nfs.10.0.0.137.xip.io
-#openshift_hosted_registry_storage_nfs_directory=/exports
+#openshift_hosted_registry_storage_host=nfs.192.168.2.200.xip.io
+#openshift_hosted_registry_storage_nfs_directory=/storage
 #openshift_hosted_registry_storage_volume_name=registry
 #openshift_hosted_registry_storage_volume_size=10Gi
 #
@@ -351,22 +351,22 @@ openshift_hosted_metrics_deploy=true
 # Option A - NFS Host Group
 # An NFS volume will be created with path "nfs_directory/volume_name"
 # on the host within the [nfs] host group.  For example, the volume
-# path using these options would be "/exports/metrics"
+# path using these options would be "/storage/metrics"
 openshift_hosted_metrics_storage_kind=nfs
 openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
-openshift_hosted_metrics_storage_nfs_directory=/exports
+openshift_hosted_metrics_storage_nfs_directory=/storage
 openshift_hosted_metrics_storage_nfs_options='*(rw,root_squash)'
 openshift_hosted_metrics_storage_volume_name=metrics
-openshift_hosted_metrics_storage_volume_size=10Gi
+openshift_hosted_metrics_storage_volume_size=100Gi
 #
 # Option B - External NFS Host
 # NFS volume must already exist with path "nfs_directory/_volume_name" on
 # the storage_host. For example, the remote volume path using these
-# options would be "nfs.example.com:/exports/metrics"
+# options would be "nfs.example.com:/storage/metrics"
 #openshift_hosted_metrics_storage_kind=nfs
 #openshift_hosted_metrics_storage_access_modes=['ReadWriteOnce']
 #openshift_hosted_metrics_storage_host=nfs.example.com
-#openshift_hosted_metrics_storage_nfs_directory=/exports
+#openshift_hosted_metrics_storage_nfs_directory=/storage
 #openshift_hosted_metrics_storage_volume_name=metrics
 #openshift_hosted_metrics_storage_volume_size=10Gi
 #
@@ -552,13 +552,13 @@ openshift_set_hostname=True
 # openshift-ansible template
 
 # The hostname for the Kibana UI
-openshift_hosted_logging_hostname=kibana.routes.10.0.0.137.xip.io
+openshift_hosted_logging_hostname=kibana.routes.192.168.2.200.xip.io
 
 # The number of Elasticsearch instances
 openshift_hosted_logging_elasticsearch_cluster_size=1
 
 # The hostname of the OpenShift master used for OAuth
-openshift_hosted_logging_master_public_url=https://openshift.10.0.0.137.xip.io
+openshift_hosted_logging_master_public_url=https://openshift.192.168.2.200.xip.io
 
 # Amount of RAM to reserve per ElasticSearch instance (e.g. 1024M, 2G)
 openshift_hosted_logging_elasticsearch_instance_ram=1024M
@@ -569,19 +569,19 @@ openshift_hosted_logging_enable_ops_cluster=false
 
 # host group for masters
 [masters]
-master.10.0.0.137.xip.io
+master.192.168.2.200.xip.io
 
 [etcd]
-master.10.0.0.137.xip.io
+master.192.168.2.200.xip.io
 
 #[lb]
-#master.10.0.0.137.xip.io
+#master.192.168.2.200.xip.io
 
 [nfs]
-master.10.0.0.137.xip.io
+master.192.168.2.200.xip.io
 
 # NOTE: Currently we require that masters be part of the SDN which requires that they also be nodes
 # However, in order to ensure that your masters are not burdened with running pods you should
 # make them unschedulable by adding openshift_schedulable=False any node that's also a master.
 [nodes]
-master.10.0.0.137.xip.io openshift_node_labels="{'region': 'infra', 'logging-infra-fluentd': 'true'}" openshift_schedulable=true
+master.192.168.2.200.xip.io openshift_node_labels="{'region': 'infra', 'logging-infra-fluentd': 'true'}" openshift_schedulable=true
