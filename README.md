@@ -19,40 +19,22 @@ Download [CentOS 7 as ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/Ce
   7. Take a look into **Configure and Update CentOS 7** step bellow
   8. From now on follow [Host Preparation](https://docs.openshift.org/latest/install_config/install/host_preparation.html)
     1. change Repo **epel-release-7-8.noarch.rpm**
-    ```
-    yum -y install \
-    https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm
-    ```
+    `yum -y install https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-8.noarch.rpm`
     2. Clone Git Repo with Submodules
-    ```
-    git clone --recursive  https://github.com/e-bits/openshift-ansible-master-only.git
-    ```
+    `git clone --recursive  https://github.com/e-bits/openshift-ansible-master-only.git`
     3. Copy `hosts.example` to `/etc/ansible/hosts` and change `hosts` to your needs
     4. Creating a ssh-key without password
-    ```
-    ssh-keygen
-    ```
+    `ssh-keygen`
     5. Copy public key from controller to master
-    ```
-    ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.2.200
-    ```
+    `ssh-copy-id -i ~/.ssh/id_rsa.pub 192.168.2.200`
 
 ### Install Master
   1. SSH into Master using root
   2. Install Docker
-  ```
-  yum install -y docker    
-  ```
-  ```
-  sed -i '/OPTIONS=.*/c\OPTIONS="--selinux-enabled --insecure-registry 172.30.0.0/16"' \
-  /etc/sysconfig/docker
-  ```
+  `yum install -y docker`
+  `sed -i '/OPTIONS=.*/c\OPTIONS="--selinux-enabled --insecure-registry 172.30.0.0/16"' /etc/sysconfig/docker`
   3. use an existing, specified volume group
-  ```
-  cat <<EOF > /etc/sysconfig/docker-storage-setup
-  VG=docker-vg
-  EOF
-  ```
+  `cat <<EOF > /etc/sysconfig/docker-storage-setup VG=docker-vg EOF`
 
 ### Configure and Update CentOS 7
   1. Login to your newly created machine using root account.
@@ -64,9 +46,7 @@ Download [CentOS 7 as ISO](http://isoredirect.centos.org/centos/7/isos/x86_64/Ce
 
 ### Install OpenShift via ansible
   1. check if your master is available
-  ```
-  ansible all -m ping
-  ```
+  `ansible all -m ping`
   2. start ansible playbook
   ```
   cd openshift-ansible-master-only/openshift-ansible
